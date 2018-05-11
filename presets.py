@@ -1446,7 +1446,7 @@ class TwoOb_NAF(Preset):
         self.num_heatup_steps = 1000
         self.batch_size = 100
 
-        self.evaluation_episodes = 3
+        self.evaluation_episodes = 1
         self.evaluate_every_x_episodes = 5
 
 class TwoOb_A3C(Preset):
@@ -1497,17 +1497,17 @@ class WOriEntity_NAF(Preset):
     def __init__(self):
         Preset.__init__(self, NAF, GymVectorObservation, AdditiveNoiseExploration)
         self.env.level = 'WOriEntity-v0'
-        self.learning_rate = 0.0007
-        self.num_heatup_steps = 350
-        self.batch_size = 32
+        self.learning_rate = 0.001
+        self.num_heatup_steps = 1000
+        self.batch_size = 100
 
         self.evaluation_episodes = 1
         self.evaluate_every_x_episodes = 5
 
-        self.exploration.initial_noise_variance_percentage = 0.3
-        self.exploration.noise_variance_decay_steps = 3000
+        # self.exploration.initial_noise_variance_percentage = 0.3
+        # self.exploration.noise_variance_decay_steps = 3000
 
-        self.agent.num_episodes_in_experience_replay = 10
+        # self.agent.num_episodes_in_experience_replay = 10
 
 class WOriEntity_A3C(Preset):
     def __init__(self):
