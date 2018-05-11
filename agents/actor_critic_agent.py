@@ -57,6 +57,8 @@ class ActorCriticAgent(PolicyOptimizationAgent):
         return gae, discounted_returns
 
     def learn_from_batch(self, batch):
+        start_time = time.clock()
+
         # batch contains a list of episodes to learn from
         current_states, next_states, actions, rewards, game_overs, _ = self.extract_batch(batch)
 
@@ -110,6 +112,9 @@ class ActorCriticAgent(PolicyOptimizationAgent):
         self.unclipped_grads.add_sample(unclipped_grads)
         self.value_loss.add_sample(losses[0])
         self.policy_loss.add_sample(losses[1])
+
+        end_time = time.clock()
+        # print('[a3c] time elapsed in learn_from_batch: {}ms'.format(int((end_time - start_time) * 1000)))
 
         return total_loss
 

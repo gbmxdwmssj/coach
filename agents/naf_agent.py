@@ -19,6 +19,8 @@ import numpy as np
 from agents.value_optimization_agent import ValueOptimizationAgent
 from utils import RunPhase, Signal
 
+import time
+
 
 # Normalized Advantage Functions - https://arxiv.org/pdf/1603.00748.pdf
 class NAFAgent(ValueOptimizationAgent):
@@ -31,6 +33,8 @@ class NAFAgent(ValueOptimizationAgent):
         self.signals += [self.l_values, self.a_values, self.mu_values, self.v_values]
 
     def learn_from_batch(self, batch):
+        start_time = time.clock()
+
         current_states, next_states, actions, rewards, game_overs, _ = self.extract_batch(batch)
 
         # TD error = r + discount*v_st_plus_1 - q_st
@@ -46,6 +50,9 @@ class NAFAgent(ValueOptimizationAgent):
 
         result = self.main_network.train_and_sync_networks({**current_states, 'output_0_0': actions}, TD_targets)
         total_loss = result[0]
+
+        end_time = time.clock()
+        # print('[naf] time elapsed in learn_from_batch: {}ms'.format(int((end_time - start_time) * 1000)))
 
         return total_loss
 
