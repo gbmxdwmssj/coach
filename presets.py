@@ -1280,6 +1280,8 @@ class Pendulum_A3C(Preset):
         self.agent.num_steps_between_gradient_updates = 5
         self.agent.gae_lambda = 1
 
+        self.evaluation_episodes = 1
+        self.evaluate_every_x_episodes = 5
 
 
 class BipedalWalker_A3C(Preset):
@@ -1438,7 +1440,7 @@ class MontezumaRevenge_BC(Preset):
         self.exploration.evaluation_policy = 'EGreedy'
         self.env.frame_skip = 1
 
-class TwoOb_NAF(Preset):
+class TwoOb_NAF_SUCCESS(Preset):
     def __init__(self):
         Preset.__init__(self, NAF, GymVectorObservation, AdditiveNoiseExploration)
         self.env.level = 'TwoOb-v0'
@@ -1449,17 +1451,19 @@ class TwoOb_NAF(Preset):
         self.evaluation_episodes = 1
         self.evaluate_every_x_episodes = 5
 
-class TwoOb_A3C(Preset):
+class TwoOb_A3C_SUCCESS(Preset):
     def __init__(self):
         Preset.__init__(self, ActorCritic, GymVectorObservation, EntropyExploration)
         self.env.level = 'TwoOb-v0'
         self.agent.policy_gradient_rescaler = 'GAE'
         self.agent.optimizer_type = 'Adam'
-        self.learning_rate = 0.0001
+        self.learning_rate = 0.00001
         self.num_heatup_steps = 0
         self.agent.discount = 0.99
         self.agent.num_steps_between_gradient_updates = 5
         self.agent.gae_lambda = 1
+
+        self.agent.num_episodes_in_experience_replay = 10
 
 class WOri_NAF_SUCCESS(Preset):
     def __init__(self):
@@ -1477,10 +1481,10 @@ class WOri_NAF_SUCCESS(Preset):
 
         self.agent.num_episodes_in_experience_replay = 10
 
-class WOri_NAF(Preset):
+class WOriEntity_NAF_FAIL(Preset):
     def __init__(self):
         Preset.__init__(self, NAF, GymVectorObservation, AdditiveNoiseExploration)
-        self.env.level = 'WOri-v0'
+        self.env.level = 'WOriEntity-v0'
         self.learning_rate = 0.0007
         self.num_heatup_steps = 350
         self.batch_size = 32
@@ -1488,35 +1492,37 @@ class WOri_NAF(Preset):
         self.evaluation_episodes = 1
         self.evaluate_every_x_episodes = 5
 
-        # self.exploration.initial_noise_variance_percentage = 0.3
-        # self.exploration.noise_variance_decay_steps = 3000
+        self.exploration.initial_noise_variance_percentage = 0.3
+        self.exploration.noise_variance_decay_steps = 3000
 
         self.agent.num_episodes_in_experience_replay = 10
 
-class WOriEntity_NAF(Preset):
-    def __init__(self):
-        Preset.__init__(self, NAF, GymVectorObservation, AdditiveNoiseExploration)
-        self.env.level = 'WOriEntity-v0'
-        self.learning_rate = 0.001
-        self.num_heatup_steps = 1000
-        self.batch_size = 100
-
-        self.evaluation_episodes = 1
-        self.evaluate_every_x_episodes = 5
-
-        # self.exploration.initial_noise_variance_percentage = 0.3
-        # self.exploration.noise_variance_decay_steps = 3000
-
-        # self.agent.num_episodes_in_experience_replay = 10
-
-class WOriEntity_A3C(Preset):
+class WOriEntity_A3C_FAIL(Preset):
     def __init__(self):
         Preset.__init__(self, ActorCritic, GymVectorObservation, EntropyExploration)
         self.env.level = 'WOriEntity-v0'
         self.agent.policy_gradient_rescaler = 'GAE'
         self.agent.optimizer_type = 'Adam'
-        self.learning_rate = 0.0001
+        self.learning_rate = 0.001
         self.num_heatup_steps = 0
         self.agent.discount = 0.99
         self.agent.num_steps_between_gradient_updates = 5
         self.agent.gae_lambda = 1
+
+        self.evaluation_episodes = 1
+        self.evaluate_every_x_episodes = 5
+
+class Worien_A3C(Preset):
+    def __init__(self):
+        Preset.__init__(self, ActorCritic, GymVectorObservation, EntropyExploration)
+        self.env.level = 'Worien-v0'
+        self.agent.policy_gradient_rescaler = 'GAE'
+        self.agent.optimizer_type = 'Adam'
+        self.learning_rate = 0.000001
+        self.num_heatup_steps = 0
+        self.agent.discount = 0.99
+        self.agent.num_steps_between_gradient_updates = 5
+        self.agent.gae_lambda = 1
+
+        # self.evaluation_episodes = 1
+        # self.evaluate_every_x_episodes = 5
