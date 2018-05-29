@@ -33,7 +33,7 @@ class AdditiveNoise(ExplorationPolicy):
     def decay_exploration(self):
         if self.variance > self.final_variance:
             self.variance -= self.variance_decay_delta
-        elif self.variance < self.final_variance:
+        if self.variance < self.final_variance:
             self.variance = self.final_variance
 
     def get_action(self, action_values):
