@@ -67,6 +67,7 @@ class NAFAgent(ValueOptimizationAgent):
             outputs=naf_head.mu,
             squeeze_output=False,
         )
+        print(action_values)
         if phase == RunPhase.TRAIN:
             action = self.exploration_policy.get_action(action_values)
         else:

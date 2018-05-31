@@ -36,6 +36,7 @@ class GeneralTensorFlowNetwork(TensorFlowArchitecture):
         self.output_heads = []
         self.activation_function = self.get_activation_function(
             tuning_parameters.agent.hidden_layers_activation_function)
+        print(self.activation_function)
         self.embedder_width = tuning_parameters.agent.embedder_width
 
         TensorFlowArchitecture.__init__(self, tuning_parameters, name, global_network, network_is_local)

@@ -1472,15 +1472,15 @@ class WOri_NAF_SUCCESS(Preset):
     def __init__(self):
         Preset.__init__(self, NAF, GymVectorObservation, AdditiveNoiseExploration)
         self.env.level = 'WOri-v0'
-        self.learning_rate = 0.0007
+        self.learning_rate = 0.0001
         self.num_heatup_steps = 350
         self.batch_size = 32
 
         self.evaluation_episodes = 1
         self.evaluate_every_x_episodes = 5
 
-        self.exploration.initial_noise_variance_percentage = 0.5
-        self.exploration.final_noise_variance_percentage = 0.0
+        self.exploration.initial_noise_variance_percentage = 0.7
+        self.exploration.final_noise_variance_percentage = 0.1
         self.exploration.noise_variance_decay_steps = 3000
 
         self.agent.num_episodes_in_experience_replay = 10

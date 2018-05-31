@@ -323,7 +323,9 @@ class NAFHead(Head):
         Head.__init__(self, tuning_parameters, head_idx, loss_weight, is_local)
         self.name = 'naf_q_values_head'
         self.num_actions = tuning_parameters.env_instance.action_space_size
+        print(tuning_parameters.env_instance.action_space_abs_range)
         self.output_scale = np.max(tuning_parameters.env_instance.action_space_abs_range)
+        print(self.output_scale)
         if tuning_parameters.agent.replace_mse_with_huber_loss:
             self.loss_type = tf.losses.huber_loss
         else:
