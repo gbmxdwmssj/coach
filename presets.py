@@ -1472,7 +1472,7 @@ class WOri_NAF_SUCCESS(Preset):
     def __init__(self):
         Preset.__init__(self, NAF, GymVectorObservation, AdditiveNoiseExploration)
         self.env.level = 'WOri-v0'
-        self.learning_rate = 0.00007
+        self.learning_rate = 0.00003
         self.num_heatup_steps = 350
         self.batch_size = 32
 
