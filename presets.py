@@ -1530,3 +1530,20 @@ class Worien_A3C(Preset):
 
         # self.evaluation_episodes = 1
         # self.evaluate_every_x_episodes = 5
+
+class Prosp_NAF(Preset):
+    def __init__(self):
+        Preset.__init__(self, NAF, GymVectorObservation, AdditiveNoiseExploration)
+        self.env.level = 'Prosp-v0'
+        self.learning_rate = 0.00003
+        self.num_heatup_steps = 350
+        self.batch_size = 32
+
+        self.evaluation_episodes = 1
+        self.evaluate_every_x_episodes = 5
+
+        self.exploration.initial_noise_variance_percentage = 0.3
+        self.exploration.final_noise_variance_percentage = 0.05
+        self.exploration.noise_variance_decay_steps = 4000
+
+        self.agent.num_episodes_in_experience_replay = 10
